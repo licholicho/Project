@@ -4,5 +4,19 @@
     <string name="app_name">Project</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="add_str">Add New Task</string>
+    <string name="ongoing_str">Ongoing Tasks</string>
+    <string name="history_str">History</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="title_activity_ongoing">OngoingActivity</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="reminder">Reminder</string>
+    <string name="title">Title</string>
+    <string name="sure_to_delete">Delete task?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
 
 </resources>
