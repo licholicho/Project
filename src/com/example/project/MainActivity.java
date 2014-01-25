@@ -10,13 +10,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import database.AppDbFacade;
-import database.AppDbHelper;
+import database.TaskDbFacade;
+import database.TaskDbHelper;
 
 public class MainActivity extends Activity {
 
-    private static AppDbHelper dbOpenHelper = null;
-    public static AppDbFacade dbHelper = null;
+    private TaskDbHelper dbOpenHelper = null;
+    public static TaskDbFacade dbHelper = null;
 	private ListView options;
 	private String [] menuOptions = {"Add New Task", "Ongoing Tasks", "History"};
 	
@@ -61,13 +61,13 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	  private void setupDbEnv() {
+	 private void setupDbEnv() {
 		  Log.i("topics.database","setup!");
 	        if (dbOpenHelper == null) {
-	            dbOpenHelper = new AppDbHelper(this);
+	            dbOpenHelper = new TaskDbHelper(this);
 	        } 
 	        if (dbHelper == null) {
-	            dbHelper = new AppDbFacade(dbOpenHelper.getWritableDatabase());
+	            dbHelper = new TaskDbFacade(dbOpenHelper.getWritableDatabase());
 	        }
 	    }
 }
