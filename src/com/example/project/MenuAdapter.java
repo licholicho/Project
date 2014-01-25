@@ -63,6 +63,7 @@ public class MenuAdapter extends BaseAdapter{
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final Task task = list.get(position);
+		final int pos = position;
 		holder.title.setText(task.getTitle());
 		holder.deleteButton.setOnClickListener(new OnClickListener() {
 	        @Override
@@ -72,7 +73,11 @@ public class MenuAdapter extends BaseAdapter{
 	        	// Add the buttons
 	        	builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
 	        	           public void onClick(DialogInterface dialog, int id) {
-	        	               // User clicked OK button
+	        	        	   //list.remove(pos);
+	        	        	   OngoingActivity.dbHelper.delete(task.getId());
+	        	        	   list = OngoingActivity.dbHelper.listAll();
+	        	        	   //
+	        	        	   refresh(pos);
 	        	           }
 	        	       });
 	        	builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -92,12 +97,22 @@ public class MenuAdapter extends BaseAdapter{
 	        public void onClick(View v) {
 	        	Log.i("ongoing","edit!");
 	        	Intent i = new Intent();
-	        	i.setClass(context, AddTaskActivity.class);
+	        	i.setClass(context, EditTaskActivity.class);
 	        	i.putExtra("id", task.getId());
+	        	i.putExtra("title", task.getTitle());
+	        	i.putExtra("description", task.getDescription());
+	        	i.putExtra("reminder", task.getReminder());
 	        	context.startActivity(i);
 	        }
 	    });
+		
 		return convertView;
+	}
+	
+	private void refresh(int pos){
+		//this.
+//		list.remove(pos);
+		this.notifyDataSetChanged();
 	}
 
 }

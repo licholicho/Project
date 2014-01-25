@@ -16,8 +16,6 @@ public class AddTaskActivity extends Activity {
 	private EditText title;
 	private EditText description;
 	private EditText reminderDistance;
-	private boolean isNew = true;
-	private long idToUpdate = -1;
 	private TaskDbHelper dbOpenHelper = null;
     private TaskDbFacade dbHelper = null;
 	
@@ -26,13 +24,7 @@ public class AddTaskActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_task);
 		setupDbEnv();
-		if (dbHelper == null || dbOpenHelper == null)
-			Log.i("top", "zle ");
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-		isNew = false;
-		idToUpdate = extras.getLong("id");
-		}
+
 		title = (EditText) findViewById(R.id.title_et);
 		description = (EditText) findViewById(R.id.desc_et);
 		reminderDistance = (EditText) findViewById(R.id.rem_et);
@@ -51,11 +43,8 @@ public class AddTaskActivity extends Activity {
 	    public boolean onOptionsItemSelected(MenuItem item) {
 	    	switch (item.getItemId()) {
 			case R.id.action_save:
-				if (isNew)
 				saveTask();
 				goBack();
-				//else
-				//updateTask();
 				break;
 			case R.id.action_cancel:
 				goBack();
@@ -73,15 +62,6 @@ public class AddTaskActivity extends Activity {
 		 Log.i("topics","save1");
 		 dbHelper.insert(task);
 		 Log.i("topics","save2");
-	 }
-	 
-	 public void updateTask(){
-		 Log.i("topics","update");
-		 Task task = dbHelper.getById(idToUpdate);
-		 task.setTitle(title.getText().toString());
-		 task.setDescription(description.getText().toString());
-		 task.setReminder(Float.valueOf(reminderDistance.getText().toString()));
-		 dbHelper.update(task);
 	 }
 	 
 	 private void setupDbEnv() {

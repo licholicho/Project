@@ -34,6 +34,10 @@
             android:name="com.example.project.HistoryActivity"
             android:label="@string/title_activity_history" >
         </activity>
+        <activity
+            android:name="com.example.project.EditTaskActivity"
+            android:label="@string/title_activity_edit_task" >
+        </activity>
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@ public class OngoingActivity extends Activity {
 	private ListView taskLv;
 	private List<Task> tasks;
 	private TaskDbHelper dbOpenHelper = null;
-    private TaskDbFacade dbHelper = null;
+    public static TaskDbFacade dbHelper = null;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
