@@ -14,6 +14,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -73,10 +75,7 @@ public class MenuAdapter extends BaseAdapter{
 	        	// Add the buttons
 	        	builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
 	        	           public void onClick(DialogInterface dialog, int id) {
-	        	        	   //list.remove(pos);
 	        	        	   OngoingActivity.dbHelper.delete(task.getId());
-	        	        	   list = OngoingActivity.dbHelper.listAll();
-	        	        	   //
 	        	        	   refresh(pos);
 	        	           }
 	        	       });
@@ -102,16 +101,59 @@ public class MenuAdapter extends BaseAdapter{
 	        	i.putExtra("title", task.getTitle());
 	        	i.putExtra("description", task.getDescription());
 	        	i.putExtra("reminder", task.getReminder());
+	        	i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	        	context.startActivity(i);
 	        }
 	    });
-		
+		if (context.getClass() == HistoryActivity.class){
+			holder.done.setEnabled(false);
+			holder.done.setVisibility(View.INVISIBLE);
+		}
+		holder.done.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+		    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+		    {
+		        if (isChecked)
+		        {
+		        	AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		        	// Add the buttons
+		        	builder.setPositiveButton(R.string.y_move, new DialogInterface.OnClickListener() {
+		        	           public void onClick(DialogInterface dialog, int id) {
+		        	        	   task.setDone(1);
+		        	        	   OngoingActivity.dbHelper.update(task);
+		        	        	   refresh(pos);
+		        	           }
+		        	       });
+		        	builder.setNeutralButton(R.string.n_delete, new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	        	   OngoingActivity.dbHelper.delete(task.getId()); 
+	        	        	   refresh(pos);
+	        	           }
+	        	       });
+		        	builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+		        	           public void onClick(DialogInterface dialog, int id) {
+		        	               // User cancelled the dialog
+		        	           }
+		        	       });
+		        	builder.setMessage(R.string.past_or_delete);
+		        	// Set other dialog properties
+		        	// Create the AlertDialog
+		        	AlertDialog dialog = builder.create();
+		        	dialog.show();  
+		        }
+
+		    }
+		});
+	
 		return convertView;
 	}
 	
 	private void refresh(int pos){
-		//this.
-//		list.remove(pos);
+		if (context.getClass() == OngoingActivity.class) {
+		list = OngoingActivity.dbHelper.listAll();
+		} else {
+			list = OngoingActivity.dbHelper.listAllDone();
+		}
 		this.notifyDataSetChanged();
 	}
 

@@ -11,11 +11,11 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/save"
-        android:icon="@drawable/ic_action_save"/>
+        android:icon="@android:drawable/ic_menu_save"/>
     <item
         android:id="@+id/action_cancel"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_remove"
+        android:icon="@android:drawable/ic_delete"
         android:title="@string/cancel"
         android:showAsAction="always"/>
 

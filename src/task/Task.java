@@ -87,5 +87,14 @@ public class Task {
 		this.done = done;
 	}
 	
+	public void setDone(int d) {
+		if (d == 1) this.done = true;
+		else this.done = false;
+	}
+	
+	public int done() {
+		return done ? 1 : 0;
+	}
+	
 	
 }

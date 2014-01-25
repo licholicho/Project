@@ -25,7 +25,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 	        sqlBuilder.append("description TEXT, ");
 	        sqlBuilder.append("reminder REAL, ");
 	        sqlBuilder.append("latitude REAL, ");
-	        sqlBuilder.append("longitude REAL");
+	        sqlBuilder.append("longitude REAL, ");
+	        sqlBuilder.append("done INT");
 	        sqlBuilder.append(");");
 
 	        try {

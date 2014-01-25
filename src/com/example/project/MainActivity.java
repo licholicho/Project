@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
 		    public void onItemClick(AdapterView<?> parent, View view, int position,
 		            long id) {
 		    	Intent intent = new Intent();
+		    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		    	switch(position) {
 		    	case 0:	    			
 		    			intent.setClass(view.getContext(), AddTaskActivity.class);
