@@ -24,6 +24,7 @@
     <string name="n_delete">No, delete it</string>
     <string name="new_task">New Task</string>
     <string name="remove_all">REMOVE ALL</string>
+    <string name="reminder_distance">Reminder Distance</string>
     
 
 </resources>

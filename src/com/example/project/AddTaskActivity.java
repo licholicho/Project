@@ -1,8 +1,15 @@
 package com.example.project;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import task.Task;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +25,7 @@ public class AddTaskActivity extends Activity {
 	private EditText reminderDistance;
 	private TaskDbHelper dbOpenHelper = null;
     private TaskDbFacade dbHelper = null;
+    private Geocoder gc;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +36,30 @@ public class AddTaskActivity extends Activity {
 		title = (EditText) findViewById(R.id.title_et);
 		description = (EditText) findViewById(R.id.desc_et);
 		reminderDistance = (EditText) findViewById(R.id.rem_et);
+		gc = new Geocoder(this, Locale.getDefault());
 		
+		if(Geocoder.isPresent()){
+			
+			  List<Address> list;
+			try {
+				list = gc.getFromLocationName("Dalvik, Islandia", 1);
+				if (list.isEmpty()){
+					 Log.i("geo","pustta!!");
+				} else {
+				  Address address = list.get(0);
+
+				  double lat = address.getLatitude();
+				  double lng = address.getLongitude();
+				  Log.i("geo",lat+" "+lng);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				 Log.i("geo","!!");
+				e.printStackTrace();
+			}
+
+			
+		}
 		
 	}
 
