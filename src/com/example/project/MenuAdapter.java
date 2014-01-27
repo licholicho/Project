@@ -23,7 +23,6 @@ public class MenuAdapter extends BaseAdapter{
 
 	List<Task> list;
 	Activity context;
-	private SureDialog dialog;
 
 	public MenuAdapter(Activity context, List<Task> list) {
 		super();

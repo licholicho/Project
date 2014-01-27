@@ -8,7 +8,10 @@ public class Reminder {
 	private String message;
 //	private Ringtone ringtone;
 	
-	public Reminder() {}
+	public Reminder() {
+		this.distance = 0;
+		this.message = "";
+	}
 	
 	public Reminder(float distance) {
 		this.distance = distance;

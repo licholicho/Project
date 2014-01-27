@@ -13,6 +13,7 @@
     <string name="title_activity_edit_task">Edit Task</string>
     <string name="description">Description</string>
     <string name="location">Location</string>
+    <string name="current_location">Your Current Location</string>
     <string name="reminder">Reminder</string>
     <string name="title">Title</string>
     <string name="sure_to_delete">Delete task?</string>
