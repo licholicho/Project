@@ -33,6 +33,7 @@ public class TaskDbFacade {
         v.put("reminder", t.getReminder());
         v.put("latitude", t.getLocation().getLatitude());
         v.put("longitude", t.getLocation().getLongitude());
+        v.put("place", t.getLocation().getNameOfPlace());
         v.put("done", 0);
 
         long id = db.insert(TaskDbHelper.TABLE_TASKS, null, v);
@@ -49,6 +50,7 @@ public class TaskDbFacade {
         v.put("reminder", t.getReminder());
         v.put("latitude", t.getLocation().getLatitude());
         v.put("longitude", t.getLocation().getLongitude());
+        v.put("place", t.getLocation().getNameOfPlace());
         v.put("done", t.done());
         
         int rowsAffected = db.update(TaskDbHelper.TABLE_TASKS, v, "_id="
@@ -170,7 +172,8 @@ public class TaskDbFacade {
                 a.setReminder(cur.getFloat(3));
                 a.getLocation().setLatitude(cur.getFloat(4));
                 a.getLocation().setLongitude(cur.getFloat(5));
-                a.setDone(cur.getInt(6));
+                a.getLocation().setNameOfPlace(cur.getString(6));
+                a.setDone(cur.getInt(7));
                 list.add(a);
 
                 cur.moveToNext();
